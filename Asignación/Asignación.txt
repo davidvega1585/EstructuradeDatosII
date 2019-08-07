@@ -1,0 +1,19 @@
+def sumar (a,b):
+    return a+b
+def restar (a,b):
+    return a-b
+def multiplicar (a,b):
+    return a*b
+def dividir (a,b):
+    return a/b
+num1= input ("Numero 1: ")
+num2= input ("Numero 2: ")
+
+print ("Opciones \n 1.Sumar \n 2.Restar \n 3.Multiplicar \n 4.Dividir")
+operaciones={'1':sumar,'2':restar,'3':multiplicar,'4':dividir}
+seleccionar= input("Escoja una opción: ")
+try:
+    resultado= operaciones[seleccionar](int(num1,int(num2)))
+    print(resultado)
+except:
+    print("opción no valida")

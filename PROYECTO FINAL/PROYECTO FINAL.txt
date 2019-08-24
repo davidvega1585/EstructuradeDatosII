@@ -1,0 +1,82 @@
+import math
+
+num = {
+    "coruña": [math.inf, ""],
+    "vigo": [math.inf, ""],
+    "valladolid": [math.inf, ""],
+    "oviedo": [math.inf, ""],
+    "bilbao": [math.inf, ""],
+    "madrid": [math.inf, ""],
+    "zaragoza": [math.inf, ""],
+    "gerona": [math.inf, ""],
+    "barcelona": [math.inf, ""],
+    "badajoz": [math.inf, ""],
+    "albacete": [math.inf, ""],
+    "valencia": [math.inf, ""],
+    "murcia": [math.inf, ""],
+    "jaen": [math.inf, ""],
+    "sevilla": [math.inf, ""],
+    "granada": [math.inf, ""],
+    "cadiz": [math.inf, ""]
+}
+
+rec = [
+    ["coruña", "vigo", 171],
+    ["coruña", "valladolid", 455],
+    ["vigo", "valladolid", 356],
+    ["valladolid", "bilbao", 280],
+    ["valladolid", "madrid", 193],
+    ["oviedo", "bilbao", 304],
+    ["bilbao", "madrid", 395],
+    ["bilbao", "zaragoza", 324],
+    ["madrid", "badajoz", 403],
+    ["madrid", "jaen", 335],
+    ["madrid", "albacete", 251],
+    ["madrid", "zaragoza", 325],
+    ["zaragoza", "barcelona", 296],
+    ["gerona", "barcelona", 100],
+    ["barcelona", "valencia", 349],
+    ["valencia", "albacete", 191],
+    ["valencia", "murcia", 241],
+    ["albacete", "murcia", 150],
+    ["jaen", "sevilla", 242],
+    ["jaen", "granada", 99],
+    ["sevilla", "cadiz", 125],
+    ["sevilla", "granada", 256],
+]
+
+
+def setValores(origen,destino,valor):
+    if valor < num[destino][0]:
+        
+        num[destino][0] = valor
+        num[destino][1] = origen
+        return True
+    return False
+
+# INICIO Y DESTINO
+inicio = "coruña"
+final = "madrid"
+
+num[inicio][0] = 0
+
+while True:
+    cancel = True
+    for i in rec:
+        
+        if setValores(i[0], i[1], num[i[0]][0] + i[2]):
+            cancel = False
+
+        if setValores(i[1], i[0], num[i[1]][0] + i[2]):
+            cancel = False
+    if cancel:
+        break
+
+camino = [final]
+
+while True:
+    if camino[-1] == inicio:
+        break
+    camino.append(num[camino[-1]][1])
+
+print("El camino mas corto desde el punto '{}' y el punto '{}' es: {}".format(inicio, final, camino[::-1]))
